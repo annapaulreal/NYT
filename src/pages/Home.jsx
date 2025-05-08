@@ -1,40 +1,21 @@
-import { Link } from 'react-router-dom';
-import useArticles from '../hooks/useArticles';
+import React from 'react';
+import { useArticlesContext } from '../context/ArticlesContext';
+import CardList from '../components/ArticleList/ArticleList';
+import '../main.css';
 
 function Home() {
-  const { articles, error } = useArticles();
-
-  if (error) return <p>Something went wrong!</p>;
+  const { articles } = useArticlesContext();
 
   return (
-    <div>
-      <h1>NY Times Most Popular Articles</h1>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {articles.map((article) => {
-          const thumbnail = article.media?.[0]?.['media-metadata']?.[0]?.url;
+      <div className="p-6">
+        <h1 className="text-center text-4xl md:text-6xl font-primary my-6">
+          NY Times Most Popular Articles
+        </h1>
 
-          return (
-            <li key={article.id} style={{ marginBottom: '20px' }}>
-              <Link to={`/article/${article.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  {thumbnail && (
-                    <img
-                      src={thumbnail}
-                      alt={article.title}
-                      style={{ width: '75px', height: '75px', marginRight: '10px' }}
-                    />
-                  )}
-                  <div>
-                    <h3 style={{ margin: '0 0 5px 0' }}>{article.title}</h3>
-                    <p style={{ margin: 0 }}>{article.abstract}</p>
-                  </div>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+        <div>
+          <CardList articles={articles} />
+        </div>
+      </div>
   );
 }
 

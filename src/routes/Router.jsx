@@ -1,15 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import ArticleDetail from '../pages/ArticleDetail';
+import { MasterLayout } from '../components/Layout/MasterLayout';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/article/:id" element={<ArticleDetail />} />
+        <Route element={<MasterLayout/>}>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/article/:id" element={<ArticleDetail/>}/>
+        </Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
