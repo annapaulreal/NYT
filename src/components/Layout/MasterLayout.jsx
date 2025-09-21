@@ -1,5 +1,5 @@
 import { Outlet } from "react-router"
-import Header from "./header"
+import Header from "./Header"
 export function MasterLayout() {
     return (
         <div className='m-5'>
